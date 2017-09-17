@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{# for posts and button #}
+{% block content %}
+
+    {# for searching #}
+
+     <div class="row bg-danger">
+        <div class="col-md-8 col-md-offset-2" style="padding: 20px;">
+            <div class="card">
+                <div class="input-group">
+                    <input class="search_box" type="text" class="form-control" placeholder="search Post"
+                           aria-describedby="btnsearch">
+                    <button class="btn  btn-lg input-group-addon" id="btnsearch">Search</button>
+                </div>
+            </div>
+            <div class="result">
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="container">
+        <div class="row">
+            {% for post in post %}
+                <div class="col-md well m-t-3">
+                    <h1> {{ post }}</h1>
+                    <div class=" ">
+                        {{ post.title }}
+                    </div>
+                    <p class="bottom-left">{{ post.text }}</p>
+                    <small>{{ post.created_at }}</small>
+                    <image src="{{ post.image.url }}" alt="{{ post.image.path }}"/>
+                {% if user.is_authenticated %}
+                    <button id="likes" data-id="{{ post.id }}" class="btn btn-social-icon btnlikes"><p style="color:#843534">Like..</p>
+                        {% if post.likes > 0 %}{{ post_likes }}{% endif %}</button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
+{# for likes #}
+{% block jsblock %}
+    <script>
+        $('.btnlikes').on('click', function (e) {
+            var btn = $(this);
+            e.preventDefault();
+            $.ajax({
+                url: '/like_post/',
+                type: 'GET',
+                data: {'post_id': btn.attr('data-id')},
+                success: function (response) {
+                    btn.html('likes' + response);
+                }
+
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+{# for searcing #}
+{% block js1block %}
+ <script>
+
+        $('#btnsearch').on('click', function () {
+
+            var content=$('.search_box').val();
+
+            var container=$('.result');
+            if(content=="")
+            {
+                container.slideUp('fast');
+            }
+            else
+            {
+                $.ajax({
+                type: 'GET',
+                data: {'q': content},
+                url: '/search/',
+                success: function (response) {
+                    container.html("");
+                    if (response.length == 0)
+                    {
+                        container.html('try something else');
+                    }
+                    else {
+                        for (i = 0; i < response.length; i++) {
+                            data = response[i]['fields'];
+                            id = response[i]['pk'];
+                            console.log(id);
+                            container.append(
+                                "<div class='card-block'><a class='link' href='/post/" + id + "'>" + data['title'] + "</a></div>"
+                            );
+                        }
+                    }
+                    container.slideDown('fast');
+                },
+                error: function (response) {
+                    container.text('wrong data');
+
+                }
+            });
+
+            }
+
+        })
+
+    </script>
+{% endblock %}
