@@ -84,3 +84,9 @@ def ajax_search(request):
 def gallery(request):
     context = {'imgs': ['img1.jpg', 'img2.jpg', 'img3.jpg','img4.png','img5.jpg' ]}
     return render(request, 'gallery.html', context)
+
+
+
+def custom_logout(request):
+    context ={'title': 'custom_logout'}
+    return render(request, "custom_logout.html", context)

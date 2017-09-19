@@ -5,43 +5,38 @@
 {% block content %}
 
     {# for searching #}
-
-     <div class="row bg-danger">
         <div class="col-md-8 col-md-offset-2" style="padding: 20px;">
-            <div class="card">
-                <div class="input-group">
-                    <input class="search_box" type="text" class="form-control" placeholder="search Post"
-                           aria-describedby="btnsearch">
-                    <button class="btn  btn-lg input-group-addon" id="btnsearch">Search</button>
-                </div>
-            </div>
+                    <input class="form-control" type="text" placeholder="search Post"><br>
+
+                    <button class="btn btn-success" id="btnsearch">Search...</button>
             <div class="result">
 
             </div>
         </div>
-    </div>
 
 
 
 
-
-    <div class="container">
-        <div class="row">
+                <div style="padding:20px">
             {% for post in post %}
-                <div class="col-md well m-t-3">
+                <div class="col-md-3 gallery-grid gallery1">
                     <h1> {{ post }}</h1>
                     <div class=" ">
                         {{ post.title }}
                     </div>
                     <p class="bottom-left">{{ post.text }}</p>
                     <small>{{ post.created_at }}</small>
-                    <image src="{{ post.image.url }}" alt="{{ post.image.path }}"/>
+                <a href="{{  post.image.url  }}" class="swipebox">
+                    <image src="{{ post.image.url }}" height="300px" width="300px"/><p>
+                </a><p>&nbsp&nbsp&nbsp&nbsp</p>
+                <a href="{{  post.image.url  }}" class="swipebox"></a>
                 {% if user.is_authenticated %}
                     <button id="likes" data-id="{{ post.id }}" class="btn btn-social-icon btnlikes"><p style="color:#843534">Like..</p>
                         {% if post.likes > 0 %}{{ post_likes }}{% endif %}</button>
                     {% endif %}
                 </div>
             {% endfor %}
+        </div>
         </div>
     </div>
 
@@ -77,7 +72,7 @@
 
         $('#btnsearch').on('click', function () {
 
-            var content=$('.search_box').val();
+            var content=$('.form-control').val();
 
             var container=$('.result');
             if(content=="")

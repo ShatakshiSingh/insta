@@ -69,7 +69,7 @@ Smart phone Compatible web template, free webdesigns for Nokia, Samsung, LG, Son
 							</li>
 							<li class="menu__item"><a href="#contact" class="menu__link scroll">CONTACT  </a></li>
                             {% if user.is_authenticated %}
-                                    <li><a class="menu__item" class="menu__link scroll" href="{% url 'logout' %}">Logout</a></li>
+                                    <li><a class="menu__item" class="menu__link scroll" href="{% url 'logout' %}?next=custom_logout/">Logout</a></li>
                                     {% else %}
                                     <li><a class="menu__item" class="menu__link scroll" href="{% url 'login' %}">Login</a></li>
 									{% endif %}
@@ -221,21 +221,21 @@ Smart phone Compatible web template, free webdesigns for Nokia, Samsung, LG, Son
 			<div class="inner_w3l_agile_grids">
 				<div class="col-md-4 w3ls_banner_bottom_grid">
 					<div class="w3l_banner_bottom_grid1">
-						<i class="fa fa-camera" aria-hidden="true"></i>
+						<i class="fa fa-camera fa-spin" aria-hidden="true"></i>
 					</div>
 					<h4>PICTURE ART</h4>
 
 				</div>
 				<div class="col-md-4 w3ls_banner_bottom_grid">
 					<div class="w3l_banner_bottom_grid1">
-						<i class="fa fa-camera-retro" aria-hidden="true"></i>
+						<i class="fa fa-camera-retro fa-spin" aria-hidden="true"></i>
 					</div>
 					<h4>AMAJING VIDEOS</h4>
 
 				</div>
 				<div class="col-md-4 w3ls_banner_bottom_grid">
 					<div class="w3l_banner_bottom_grid1">
-						<i class="fa fa-video-camera" aria-hidden="true"></i>
+						<i class="fa fa-video-camera fa-spin" aria-hidden="true"></i>
 					</div>
 					<h4>BEST PHOTOGRAPHER</h4>
 
@@ -302,7 +302,7 @@ Smart phone Compatible web template, free webdesigns for Nokia, Samsung, LG, Son
 			</div>
 			<div class="inner_w3l_agile_grids">
 		<div class="col-md-3 w3layouts_stats_left w3_counter_grid">
-		    <i class="fa fa-picture-o" aria-hidden="true"></i>
+		    <i class="fa fa-picture-o " aria-hidden="true"></i>
 			<p class="counter">1,546</p>
 			<h3>Complete Projects</h3>
 		</div>
